@@ -18,7 +18,7 @@ export class PostsService {
 
     queryBuilder
       .where('post.authorId = :authorId', { authorId: pageOptionsDto.userId })
-      .skip(pageOptionsDto.skip)
+      .skip((pageOptionsDto.page - 1) * pageOptionsDto.take)
       .take(pageOptionsDto.take);
 
     let itemCount = await queryBuilder.getCount();
